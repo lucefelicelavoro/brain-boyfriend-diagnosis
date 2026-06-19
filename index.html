@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>あなたの脳内彼氏タイプ診断</title>
+  <meta name="description" content="“またこれか…”を繰り返す理由は、あなたの中の「彼」かもしれません。10問でわかる脳内彼氏タイプ診断。">
+  <style>
+    :root {
+      --bg: #160625;
+      --bg-2: #230936;
+      --panel: #fff9f1;
+      --ink: #1a1b3f;
+      --muted: #5f5871;
+      --pink: #cf4b86;
+      --pink-dark: #9c245e;
+      --pink-soft: #ffe2ee;
+      --gold: #d7ad4f;
+      --gold-soft: #fff0b8;
+      --white: #fffdfb;
+      --line: rgba(215, 173, 79, .55);
+      --shadow: 0 22px 58px rgba(0, 0, 0, .38);
+      --serif: "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif JP", serif;
+      --sans: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--white);
+      font-family: var(--sans);
+      background:
+        radial-gradient(circle at 78% 10%, rgba(215, 173, 79, .14), transparent 9%),
+        radial-gradient(circle at 50% 100%, rgba(207, 75, 134, .18), transparent 35%),
+        linear-gradient(180deg, #120320 0%, var(--bg) 42%, #090318 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, transparent 0 58px, rgba(215, 173, 79, .25) 58px 59px, transparent 59px) 11% 0 / 1px 180px no-repeat,
+        linear-gradient(180deg, transparent 0 62px, rgba(215, 173, 79, .22) 62px 63px, transparent 63px) 31% 0 / 1px 210px no-repeat,
+        linear-gradient(180deg, transparent 0 55px, rgba(215, 173, 79, .24) 55px 56px, transparent 56px) 50% 0 / 1px 190px no-repeat,
+        linear-gradient(180deg, transparent 0 64px, rgba(215, 173, 79, .22) 64px 65px, transparent 65px) 69% 0 / 1px 220px no-repeat,
+        linear-gradient(180deg, transparent 0 58px, rgba(215, 173, 79, .25) 58px 59px, transparent 59px) 89% 0 / 1px 180px no-repeat,
+        radial-gradient(circle, rgba(255, 240, 184, .75) 0 1px, transparent 1.8px);
+      background-size: auto, auto, auto, auto, auto, 64px 64px;
+      opacity: .56;
+    }
+
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+
+    .page {
+      position: relative;
+      width: min(100%, 560px);
+      margin: 0 auto;
+      padding: 0 18px 36px;
+    }
+
+    .section { padding: 34px 0 28px; }
+    .hidden { display: none !important; }
+
+    h1, h2, h3 {
+      font-family: var(--serif);
+      letter-spacing: .03em;
+    }
+
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 18px;
+      padding-top: 22px;
+    }
+
+    .hero-illustration {
+      overflow: hidden;
+      width: 100%;
+      border: 1.5px solid var(--gold);
+      border-radius: 20px;
+      background: #0b102a;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-illustration img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .hero-title {
+      margin: 0;
+      color: var(--white);
+      font-size: clamp(30px, 8.6vw, 42px);
+      line-height: 1.22;
+      text-align: center;
+      text-shadow: 0 0 20px rgba(255, 218, 232, .24);
+    }
+
+    .hero-subtitle {
+      margin: 12px 0 0;
+      color: #ffd0e2;
+      font-family: var(--serif);
+      font-size: clamp(13px, 3.7vw, 17px);
+      font-weight: 700;
+      line-height: 1.65;
+      text-align: center;
+    }
+
+    .hero-copy {
+      margin: 22px auto 0;
+      width: min(100%, 430px);
+      color: #ffd7e7;
+      font-weight: 800;
+      font-size: clamp(16px, 4.3vw, 21px);
+      line-height: 1.8;
+      text-shadow: 0 0 14px rgba(255, 169, 208, .18);
+    }
+
+    .hero-copy p { margin: 0 0 18px; }
+
+    .hero-message {
+      margin: 8px auto 0;
+      width: min(100%, 430px);
+      padding-top: 18px;
+      border-top: 1px dotted rgba(255, 255, 255, .22);
+      color: var(--gold-soft);
+      font-weight: 900;
+      font-size: clamp(16px, 4.4vw, 22px);
+      line-height: 1.75;
+    }
+
+    .hero-description {
+      margin: 16px auto 0;
+      padding-top: 16px;
+      width: min(100%, 500px);
+      border-top: 1px dotted rgba(255, 255, 255, .22);
+      color: rgba(255, 255, 255, .82);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.85;
+    }
+
+    .button-wrap { margin: 22px auto 0; width: min(100%, 430px); }
+
+    .primary-button,
+    .ghost-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 62px;
+      padding: 13px 20px;
+      border-radius: 999px;
+      border: 2px solid var(--gold);
+      color: var(--white);
+      text-decoration: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #db5794 0%, #b42f72 100%);
+      box-shadow: 0 12px 28px rgba(207, 75, 134, .32), inset 0 0 0 3px rgba(255, 233, 176, .28);
+      font-family: var(--serif);
+      font-size: clamp(17px, 4.7vw, 23px);
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .primary-button::before,
+    .primary-button::after {
+      content: "✦";
+      margin: 0 14px;
+      color: var(--gold-soft);
+      filter: drop-shadow(0 0 8px rgba(255, 234, 147, .8));
+      font-size: .8em;
+    }
+
+    .ghost-button {
+      min-height: 44px;
+      color: var(--gold-soft);
+      background: rgba(255, 255, 255, .06);
+      box-shadow: none;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .intro-card,
+    .question-card,
+    .pre-result-card,
+    .result-text-card,
+    .result-section-card,
+    .line-card {
+      position: relative;
+      border: 1.5px solid var(--gold);
+      border-radius: 20px;
+      background: var(--panel);
+      color: var(--ink);
+      box-shadow: var(--shadow);
+    }
+
+    .intro-card {
+      padding: 26px 20px;
+    }
+
+    .card-title {
+      margin: 0 0 16px;
+      color: var(--ink);
+      font-size: 20px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .intro-card p,
+    .pre-result-card p,
+    .result-text-card p,
+    .result-section-card p,
+    .line-card p {
+      margin: 0 0 16px;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.9;
+      white-space: pre-line;
+    }
+
+    .divider {
+      height: 1px;
+      margin: 20px 0;
+      border-top: 1px dotted var(--gold);
+    }
+
+    .quiz-title {
+      margin: 0 0 18px;
+      color: var(--white);
+      font-size: 28px;
+      line-height: 1.35;
+      text-align: center;
+    }
+
+    .progress-panel {
+      margin-bottom: 15px;
+      color: var(--gold-soft);
+      text-align: center;
+    }
+
+    .progress-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 120px;
+      padding: 10px 20px;
+      border: 1px solid var(--gold);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .06);
+      font-family: var(--serif);
+      font-size: 23px;
+      font-weight: 800;
+    }
+
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 7px;
+      margin-top: 14px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .26);
+    }
+
+    .dot.done {
+      background: var(--pink);
+      box-shadow: 0 0 12px rgba(207, 75, 134, .92);
+    }
+
+    .question-card {
+      padding: 24px 16px 18px;
+    }
+
+    .question-title {
+      margin: 0 0 18px;
+      color: var(--ink);
+      font-size: clamp(19px, 5.3vw, 26px);
+      line-height: 1.55;
+      text-align: center;
+    }
+
+    .answers {
+      display: grid;
+      gap: 11px;
+    }
+
+    .answer {
+      display: grid;
+      grid-template-columns: 20px 1fr 18px;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      min-height: 58px;
+      padding: 12px 13px;
+      border: 1px solid rgba(215, 173, 79, .68);
+      border-radius: 999px;
+      color: var(--ink);
+      background: rgba(255, 253, 250, .92);
+      font-weight: 800;
+      font-size: 13px;
+      line-height: 1.62;
+      text-align: left;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, .08);
+    }
+
+    .answer span:first-child,
+    .answer span:last-child {
+      color: var(--gold);
+      text-align: center;
+    }
+
+    .answer.selected {
+      background: var(--pink-soft);
+      border-color: var(--pink);
+    }
+
+    .quiz-hint {
+      margin: 18px 0 0;
+      padding: 14px;
+      border: 1px solid rgba(215, 173, 79, .48);
+      border-radius: 16px;
+      color: rgba(255, 255, 255, .82);
+      background: rgba(255, 255, 255, .06);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    .quiz-hint span,
+    .fine-print span {
+      display: block;
+    }
+
+    .back-wrap {
+      margin-top: 16px;
+    }
+
+    .pre-result-card {
+      padding: 28px 20px;
+    }
+
+    .result-kicker {
+      width: fit-content;
+      margin: 0 auto 18px;
+      padding: 8px 24px;
+      border: 1px solid var(--gold);
+      border-radius: 999px;
+      color: var(--gold-soft);
+      background: rgba(255, 255, 255, .06);
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .result-visual {
+      overflow: hidden;
+      width: min(100%, 420px);
+      aspect-ratio: 4 / 5;
+      margin: 0 auto 16px;
+      border: 1px solid rgba(215, 173, 79, .54);
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 50% 22%, rgba(255, 210, 232, .28), transparent 30%),
+        linear-gradient(145deg, #100620, #24104a);
+      box-shadow: var(--shadow);
+    }
+
+    .result-visual img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .type-mark {
+      display: none;
+      place-items: center;
+      width: 96px;
+      height: 96px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      color: var(--gold-soft);
+      background: rgba(255, 255, 255, .06);
+      font-family: var(--serif);
+      font-size: 58px;
+      font-weight: 800;
+      text-shadow: 0 0 18px rgba(255, 232, 170, .26);
+    }
+
+    .result-title {
+      margin: 0 0 8px;
+      color: var(--white);
+      font-size: clamp(30px, 8vw, 42px);
+      line-height: 1.34;
+      text-align: center;
+      text-shadow: 0 0 18px rgba(255, 222, 238, .2);
+    }
+
+    .result-title span { display: block; }
+
+    .result-catch {
+      margin: 0 0 16px;
+      color: var(--gold-soft);
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.7;
+      text-align: center;
+      white-space: pre-line;
+    }
+
+    .result-text-card,
+    .result-section-card,
+    .line-card {
+      margin-top: 13px;
+      padding: 20px 17px;
+    }
+
+    .section-heading {
+      margin: 0 0 12px;
+      color: var(--pink-dark);
+      font-size: 18px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .phrase-list {
+      margin: 0;
+      padding-left: 1.15em;
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.9;
+    }
+
+    .line-card {
+      background:
+        linear-gradient(180deg, rgba(255, 249, 252, .98), rgba(255, 246, 232, .98)),
+        var(--panel);
+    }
+
+    .share-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+      margin-top: 14px;
+    }
+
+    .share-row .ghost-button {
+      min-height: 38px;
+      padding: 8px 5px;
+      font-size: 11px;
+    }
+
+    .fine-print {
+      margin: 20px 0 0;
+      padding: 14px;
+      border: 1px solid rgba(215, 173, 79, .38);
+      border-radius: 16px;
+      color: rgba(255, 255, 255, .7);
+      background: rgba(255, 255, 255, .05);
+      font-size: 11px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    @media (min-width: 560px) {
+      .page { padding-inline: 22px; }
+      .intro-card, .question-card, .pre-result-card, .result-text-card, .result-section-card, .line-card {
+        border-radius: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="section hero" id="top">
+      <div class="hero-illustration" aria-label="脳内彼氏タイプ診断のイメージイラスト">
+        <img src="assets/codex/hero-wide.png" alt="">
+      </div>
+      <div>
+        <h1 class="hero-title">あなたの脳内彼氏タイプ診断</h1>
+        <p class="hero-subtitle">“またこれか…”を繰り返す理由は、<br>あなたの中の「彼」かもしれません。</p>
+        <div class="hero-copy">
+          <p>休んでるだけなのに、<br>脳内で誰かに怒られてない？</p>
+          <p>褒められたのに、<br>その言葉を玄関で追い返してない？</p>
+          <p>頼ればいいのに、<br>「私がやった方が早い」って、<br>また全部ひとりで抱えてない？</p>
+        </div>
+        <p class="hero-message">その声、あなたの本音じゃなくて、<br>“内なる彼”かもしれません。</p>
+        <p class="hero-description">この診断は、恋愛相手を診断するものではありません。自分を責める声、休ませてくれない声、頼る前に止めてくる声、褒め言葉を受け取らせてくれない声。そういう自分の中の“厳しい声”を、内なる彼として見つける診断です。</p>
+      </div>
+
+      <div class="intro-card">
+        <h2 class="card-title">診断スタート前に</h2>
+        <p>休めない。
+頼れない。
+受け取れない。
+自分責めが止まらない。</p>
+        <p>その声、
+あなたの本音じゃなくて、
+脳内に住んでいる“厳しい彼”かもしれません。</p>
+        <p>10個の質問に答えると、
+あなたの人生を無理ゲーにしている
+内なる彼のタイプがわかります。</p>
+        <div class="divider"></div>
+        <p>責めるための診断ではありません。</p>
+        <p>「あ、私の中でこの彼がしゃべってたんだ」
+と気づくための診断です。</p>
+      </div>
+      <div class="button-wrap">
+        <button class="primary-button" type="button" id="startButton">私の中の彼を診断する</button>
+      </div>
+    </section>
+
+    <section class="section hidden" id="quiz">
+      <h2 class="quiz-title">脳内彼氏タイプ診断</h2>
+      <div class="progress-panel">
+        <div class="progress-label" id="progressLabel">Q1 / 10</div>
+        <div class="dots" id="dots" aria-hidden="true"></div>
+      </div>
+      <div class="question-card">
+        <h3 class="question-title" id="questionTitle"></h3>
+        <div class="answers" id="answers"></div>
+      </div>
+      <p class="quiz-hint">
+        <span>深く考えすぎなくて大丈夫です。</span>
+        <span>いつもの自分に近いものを選んでください。</span>
+      </p>
+      <div class="back-wrap">
+        <button class="ghost-button" type="button" id="backButton">前の質問に戻る</button>
+      </div>
+    </section>
+
+    <section class="section hidden" id="preResult">
+      <div class="pre-result-card">
+        <h2 class="card-title">診断おつかれさまでした。</h2>
+        <p>あなたの中で、
+いちばんよく出勤していた“彼”を見ていきます。</p>
+        <p>これは、あなたを責めるための結果ではありません。</p>
+        <p>今まであなたを守ろうとして、
+少しだけ守り方を間違えていた声に
+名前をつけるための結果です。</p>
+        <div class="button-wrap">
+          <button class="primary-button" type="button" id="viewResultButton">診断結果を見る</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section hidden" id="result">
+      <div class="result-kicker">診断結果</div>
+      <div class="result-visual" id="resultVisual"></div>
+      <h2 class="result-title" id="resultTitle"></h2>
+      <p class="result-catch" id="resultCatch"></p>
+      <div id="resultBody"></div>
+      <div class="line-card">
+        <h3 class="section-heading">タイプ別ミニレター</h3>
+        <div id="lineText"></div>
+        <div class="button-wrap">
+          <a class="primary-button" id="lineLink" href="#" target="_blank" rel="noopener">LINEでタイプ別ミニレターを受け取る</a>
+        </div>
+      </div>
+      <div class="share-row">
+        <button class="ghost-button" type="button" id="shareButton">結果をシェア</button>
+        <button class="ghost-button" type="button" id="copyButton">結果をコピー</button>
+        <button class="ghost-button" type="button" id="retryButton">もう一度診断</button>
+      </div>
+    </section>
+
+    <p class="fine-print">
+      <span>この診断は医療・心理診断ではありません。</span>
+      <span>自分の中の声に気づくためのセルフワーク入口としてお楽しみください。</span>
+    </p>
+  </main>
+
+  <script>
+    const LINE_URL = "https://lin.ee/pkn27tH";
+    const TYPE_ORDER = ["A", "B", "C", "D", "E"];
+
+    const QUESTIONS = [
+      { text: "休もうとした時、いちばん近い感覚は？", answers: { A: "「まだやること終わってないよね？」と頭の中で急かされる", B: "「私だけ休んだら誰かに嫌な顔されるかも」と周りが気になる", C: "「どうせ休んでも誰も助けてくれないし」と少し冷める", D: "「休む理由をちゃんと説明できるかな」と考え始める", E: "「休んだところで何か変わるの？」と自分に冷たくなる" } },
+      { text: "誰かに頼ろうとした時、最初に出てくる声は？", answers: { A: "「頼む前に、自分でやれるところまでやりなよ」", B: "「相手に迷惑って思われたらどうしよう」", C: "「どうせ分かってもらえないし、自分でやった方がいい」", D: "「頼む内容をちゃんと整理してからじゃないとダメ」", E: "「頼るほどのこと？大げさじゃない？」" } },
+      { text: "褒められた時、ついやってしまう反応は？", answers: { A: "「この程度で喜んでたら成長止まる」と思う", B: "「調子に乗ってると思われたら嫌だな」と小さくなる", C: "「どうせ社交辞令でしょ」と受け流す", D: "「どの部分を評価されたんだろう」と分析する", E: "「いや、もっとすごい人いるし」と冷める" } },
+      { text: "小さな失敗をした夜、頭の中で起きやすいことは？", answers: { A: "「次は絶対ミスしないように」と改善点を詰め込む", B: "「あの人、怒ってるかも。嫌われたかも」と不安になる", C: "「やっぱり期待しない方がよかった」と閉じる", D: "「原因は何？どこが悪かった？」と脳内会議が始まる", E: "「ほらね、やっぱり私には向いてない」と冷たく結論づける" } },
+      { text: "優しくされた時、心の奥で出やすい反応は？", answers: { A: "「この分、もっと返さなきゃ」と頑張ろうとする", B: "「あとで急に冷たくならないかな」と相手の変化を警戒する", C: "「期待すると傷つくから、あまり受け取らないでおこう」と距離を取る", D: "「これはどういう意図なんだろう」と考えすぎる", E: "「本当に？どうせ一時的でしょ」と疑ってしまう" } },
+      { text: "何か新しいことを始めようとした時、いちばん出やすい声は？", answers: { A: "「やるならちゃんと結果を出さなきゃ」", B: "「周りにどう思われるかな」と人の反応が気になる", C: "「どうせ誰も応援してくれないし」とひとりで閉じる", D: "「計画を立てて、リスクも考えてからじゃないと」と止まる", E: "「で、それ意味あるの？誰が見るの？」と冷める" } },
+      { text: "誰かの機嫌が悪い時、あなたの中で起きやすいことは？", answers: { A: "「私がもっとちゃんとしていれば」と自分を責める", B: "「私、何かしたかな？」とすぐ相手の顔色を読む", C: "「またか。もう期待しないでおこう」と距離を置く", D: "「原因は何だろう。私の言動に問題があった？」と分析する", E: "「面倒くさい。どうせ私が悪いことになるんでしょ」と冷める" } },
+      { text: "頑張っているのに、足りない気がする時の感覚は？", answers: { A: "「まだできる。もっとやらなきゃ」と自分を追い込む", B: "「これで認めてもらえるかな」と周りの評価が気になる", C: "「どれだけ頑張っても、どうせ分かってもらえない」と寂しくなる", D: "「何が足りないのか整理しなきゃ」と課題探しを始める", E: "「結局、何をしても中途半端だよね」と自分に冷たくなる" } },
+      { text: "本音を言おうとした時、出てくるブレーキは？", answers: { A: "「言うならちゃんと伝えなきゃ。中途半端はダメ」", B: "「これを言ったら嫌われるかも」と怖くなる", C: "「言ってもどうせ分かってもらえない」と飲み込む", D: "「感情的に言うのはよくない。整理してからにしよう」と止める", E: "「こんなこと言っても意味ないでしょ」と引っ込める" } },
+      { text: "幸せが近づいた時、いちばん出やすい反応は？", answers: { A: "「ここで油断したらダメ。もっと頑張らなきゃ」", B: "「急に失うのが怖い。相手の気持ちをちゃんと見なきゃ」", C: "「期待しすぎると傷つくから、少し離れておこう」", D: "「これは本当に大丈夫？冷静に考えよう」と分析する", E: "「どうせ長く続かないでしょ」と先に冷める" } }
+    ];
+
+    const RESULTS = {
+      A: {
+        title: "A：鬼上司彼氏\nタイプ",
+        catch: "まだ足りない、と急かす声。",
+        keyword: "鬼上司",
+        image: "assets/codex/result-a-onijoshi.png",
+        sections: [
+          ["あなたの中の彼はこんな人", "あなたの中にいるのは、\n鬼上司彼氏タイプかもしれません。\n\nこの彼は、あなたが少し休もうとした瞬間に出勤してきます。\n\n「で、今日なに終わったの？」\n「まさかこの状態で休む気？」\n「休むなら成果出してからにしようか」\n\n……いや、休憩するだけで面接始まるの、無理ゲーすぎる。"],
+          ["よく出る口ぐせ", "「まだできるよね？」\n「この程度で疲れたとか言わないよね？」\n「みんなもっと頑張ってるよ？」"],
+          ["この彼が出やすい場面", "このタイプの彼が強いと、\n体は疲れているのに、なかなか休めません。\n\nソファに座っても、布団に入っても、スマホを見ながらぼーっとしていても、頭の中では誰かが腕組みしている。\n\nその声が強いと、休んでいるはずなのに全然休まらない。\n頑張っても頑張っても、合格ラインがどんどん遠くなる。\n\nまるで、クリアした瞬間に追加ステージが出てくるゲーム。\nしかもその追加ステージ、誰が頼んだんですか案件。"],
+          ["本当は守ろうとしているもの", "でもこの彼は、あなたを苦しめたいだけではありません。\n\n本当は、\n置いていかれたくなかった。\n価値がないと思われたくなかった。\nちゃんとしていないと愛されない気がしていた。\n\nだから、あなたを止めないように、ずっと厳しい言葉で走らせてきたのかもしれません。"],
+          ["でも、その守り方は少しきついかもしれません", "でも今のあなたには、もう少しやさしい声が必要です。"],
+          ["今日からできる小さな一歩", "今日の合言葉は、\n「休む前に成果を証明しなくていい」\n\nあなたは何かを終わらせる前でも、少し休んでいい。"],
+          ["あなたへのやさしい一言", "あなたは、まだ足りない人じゃありません。\nずっと走ってきた人です。\n今日は少しだけ、脳内の上司を退勤させてあげましょう。\n\n本日の裁判は閉廷です。"]
+        ],
+        line: "鬼上司彼氏タイプの彼が、\nあなたの中でどんな時に出やすいのか。\n\nそして、\n休む前に自分を責める声から、\n「今日はここまでで十分だよ」という声へ戻すにはどうしたらいいのか。\n\nタイプ別の深掘りミニレターを、\n公式LINEで受け取れるように準備しています。\n\n診断結果のタイプ名\n「鬼上司」\nをLINEで送ってください。\n\n公式LINEでは、タイプ別ミニレターのほかに、診断の更新、有料noteの完成、追加ワークのお知らせも受け取れます。"
+      },
+      B: {
+        title: "B：モラ彼氏\nタイプ",
+        catch: "空気で支配して、言葉を濁す。",
+        keyword: "モラ彼",
+        image: "assets/codex/result-c-mora.png",
+        sections: [
+          ["あなたの中の彼はこんな人", "あなたの中にいるのは、\nモラ彼氏タイプかもしれません。\n\nこの彼は、誰かの機嫌が少し悪くなった瞬間に、あなたの中でささやいてきます。\n\n「今の言い方、まずかったんじゃない？」\n「なんで気づけなかったの？」\n「普通、空気読めるよね？」\n「相手の気持ちくらい察しなよ」\n\n……いや、ちょっと待って。\n他人の機嫌まで全部あなたの担当にされてるの、無理ゲーすぎる。"],
+          ["よく出る口ぐせ", "「空気読んで」\n「迷惑かけないで」\n「嫌われるよ」\n「察してよ」"],
+          ["この彼が出やすい場面", "このタイプの彼が強いと、人の顔色を読むのが当たり前になります。\n\n相手の返信が遅いだけで不安になる。\n誰かが不機嫌だと、自分が何かした気がする。\n優しくされても、あとで急に冷たくならないか身構える。\n本音を言う前に、相手がどう受け取るかを何パターンも考える。\n\nそして気づくと、自分の気持ちより、相手の機嫌の方が優先になっている。"],
+          ["本当は守ろうとしているもの", "でもね、\nそれはあなたが弱いからでも、面倒な人だからでもありません。\n\nたぶん、今までたくさん空気を読んできたから。\n怒られないように。\n嫌われないように。\n関係が壊れないように。\n誰かの機嫌が悪くならないように。\n\nそうやって、あなたは一生懸命守ってきたのかもしれません。"],
+          ["でも、その守り方は少しきついかもしれません", "この彼は厳しいけれど、本当はあなたを責めたいだけじゃない。\n\n「先に気づけば傷つかない」\n「ちゃんと察すれば捨てられない」\n「相手を怒らせなければ安心できる」\n\nそう信じて、あなたを守ろうとしていたのかもしれません。\n\nでも今のあなたには、もう少しやさしいルールが必要です。"],
+          ["今日からできる小さな一歩", "今日の合言葉は、\n「相手の機嫌まで、私が背負わなくていい」\n\n誰かが不機嫌でも、すぐに自分を責めなくていい。\n\nあなたは、相手の空気を読むためだけに生きているわけじゃない。\nあなたの気持ちも、ちゃんとここに置いていい。"],
+          ["あなたへのやさしい一言", "あなたは、誰かの機嫌を守るためだけに生きている人じゃありません。\n相手の顔色を見る前に、今日は自分の心の色も見てあげてください。"]
+        ],
+        line: "モラ彼氏タイプの彼が、\nどんな場面であなたを小さくさせているのか。\n\nそして、\n人の機嫌を読みすぎる自分を責めずに、\n少しずつ自分の気持ちへ戻るにはどうしたらいいのか。\n\nタイプ別の深掘りミニレターを、\n公式LINEで受け取れるように準備しています。\n\n診断結果のタイプ名\n「モラ彼」\nをLINEで送ってください。\n\n公式LINEでは、タイプ別ミニレターのほかに、診断の更新、有料noteの完成、追加ワークのお知らせも受け取れます。"
+      },
+      C: {
+        title: "C：無関心彼氏\nタイプ",
+        catch: "頼る前に、心を閉じさせる。",
+        keyword: "無関心",
+        image: "assets/codex/result-d-mukanshin.png",
+        sections: [
+          ["あなたの中の彼はこんな人", "あなたの中にいるのは、\n無関心彼氏タイプかもしれません。\n\nこの彼は、あなたが誰かに頼ろうとした瞬間に、急に冷たい顔で出てきます。\n\n「好きにすれば？」\n「どうでもいいけど」\n「期待しない方が楽だよ」\n「どうせ分かってもらえないでしょ」\n\n……いや、助けてほしいだけなのに、\n脳内で先に見捨てられるの、つらすぎる。"],
+          ["よく出る口ぐせ", "「期待しない」\n「求めない」\n「どうせひとり」\n「最初から頼らなければ傷つかない」"],
+          ["この彼が出やすい場面", "このタイプの彼が強いと、誰かに頼る前に、心の中であきらめてしまいます。\n\nお願いする前に、「どうせ無理」と思う。\n相談する前に、「言っても分かってもらえない」と閉じる。\n助けてほしいのに、「私がやった方が早い」と抱える。\n本当は寂しいのに、平気なふりをしてしまう。\n\nこの彼は、怒鳴るわけではありません。\n強く責めてくるわけでもありません。\n\nでも、静かに距離を取ってくる。\nその沈黙が、いちばん刺さることがあります。"],
+          ["本当は守ろうとしているもの", "頼ってがっかりしたこと。\n助けてほしかった時に、助けてもらえなかったこと。\n期待したあとに、ひとりで立て直したこと。\n\nその積み重ねがあると、心は先にあきらめることで、自分を守ろうとします。\n\nだから、無関心彼氏タイプの彼は、あなたを苦しめたいだけではありません。\n\n本当は、\nもうがっかりしたくなかった。\nもう置いていかれたくなかった。\nもう期待して傷つきたくなかった。"],
+          ["でも、その守り方は少しきついかもしれません", "だから、誰かに手を伸ばす前に、あなたの手をそっと下ろさせてきたのかもしれません。\n\nでも今のあなたには、「どうせひとり」ではなく、「少しだけ頼ってみてもいい」という声が必要です。"],
+          ["今日からできる小さな一歩", "今日の合言葉は、\n「期待しすぎなくていい。でも、最初からあきらめなくていい」\n\n全部を預けなくていい。\n大きなお願いじゃなくていい。\n\n「これだけ聞いてもいい？」\n「少し手伝ってもらえる？」\n「今ちょっとしんどい」\n\nその小さな一言からで大丈夫です。"],
+          ["あなたへのやさしい一言", "期待して傷ついたあなたは、弱かったんじゃありません。\nそれでも本当は、誰かとつながりたかったんだと思います。\n今日は小さく、手を伸ばす練習からで大丈夫です。"]
+        ],
+        line: "無関心彼氏タイプの彼が、\nあなたに「頼る前にあきらめるクセ」を作ってきた理由。\n\nそして、\n傷つかないために閉じてきた心を、\n少しずつ安心して開くにはどうしたらいいのか。\n\nタイプ別の深掘りミニレターを、\n公式LINEで受け取れるように準備しています。\n\n診断結果のタイプ名\n「無関心」\nをLINEで送ってください。\n\n公式LINEでは、タイプ別ミニレターのほかに、診断の更新、有料noteの完成、追加ワークのお知らせも受け取れます。"
+      },
+      D: {
+        title: "D：正論彼氏\nタイプ",
+        catch: "感情を、正しさで閉じ込める。",
+        keyword: "正論",
+        image: "assets/codex/result-e-seiron.png",
+        sections: [
+          ["あなたの中の彼はこんな人", "あなたの中にいるのは、\n正論彼氏タイプかもしれません。\n\nこの彼は、あなたが泣きそうになった時や弱音を吐きたい時に、すぐ資料を持って出てきます。\n\n「感情じゃなくて、ちゃんと考えなよ」\n「それって本当に必要？」\n「原因分析した？」\n「で、次どうするの？」\n\n……いや、今ほしいのは議事録じゃなくて、\n毛布なんよ。"],
+          ["よく出る口ぐせ", "「ちゃんと考えなよ」\n「原因分析した？」\n「感情的になるな」\n「で、次どうするの？」"],
+          ["この彼が出やすい場面", "このタイプの彼が強いと、感情を感じる前に、すぐ分析が始まります。\n\n悲しいのに、「でも相手にも事情があるし」と納得しようとする。\n傷ついたのに、「私にも悪いところがあったかも」と整理しようとする。\n疲れているのに、「何が原因か考えなきゃ」と改善点を探す。\n泣きたいのに、泣く前に頭で処理しようとする。"],
+          ["本当は守ろうとしているもの", "もちろん、考える力はあなたの強さです。\n\n落ち着いて見られること。\n状況を整理できること。\n感情だけで動かないこと。\n\nそれはすごく大切な力です。\n\nこの彼は、あなたを苦しめたいだけではありません。\n\n本当は、\n間違えたくなかった。\n感情的になって失敗したくなかった。\n人に迷惑をかけたくなかった。\nちゃんとした人でいたかった。"],
+          ["でも、その守り方は少しきついかもしれません", "でも、正論彼氏タイプが強くなりすぎると、あなたの感情が置いていかれます。\n\n本当は悲しかった。\n本当は悔しかった。\n本当は寂しかった。\n本当は「分かってほしい」だけだった。\n\nなのに、心が言葉になる前に、正しさでフタをされてしまう。"],
+          ["今日からできる小さな一歩", "今日の合言葉は、\n「感情は、処理する前に感じていい」\n\n泣いてから考えていい。\n落ち込んでから整理していい。\n悲しいまま、一度休んでいい。\n\nあなたの気持ちは、プレゼン資料にしなくても存在していい。"],
+          ["あなたへのやさしい一言", "あなたの感情は、正しい形に整えなくても大丈夫です。\n泣きたい、寂しい、悔しい。\nそのままの気持ちにも、ちゃんと居場所を作ってあげましょう。"]
+        ],
+        line: "正論彼氏タイプの彼が、\nあなたの感情をどうやって静かに止めてきたのか。\n\nそして、\n正しさで自分を追い込まずに、\n感情を置いていかないためにはどうしたらいいのか。\n\nタイプ別の深掘りミニレターを、\n公式LINEで受け取れるように準備しています。\n\n診断結果のタイプ名\n「正論」\nをLINEで送ってください。\n\n公式LINEでは、タイプ別ミニレターのほかに、診断の更新、有料noteの完成、追加ワークのお知らせも受け取れます。"
+      },
+      E: {
+        title: "E：冷笑彼氏\nタイプ",
+        catch: "始める前から、夢を笑う。",
+        keyword: "冷笑",
+        image: "assets/codex/result-b-reishou.png",
+        sections: [
+          ["あなたの中の彼はこんな人", "あなたの中にいるのは、\n冷笑彼氏タイプかもしれません。\n\nこの彼は、あなたが何かを始めようとした瞬間に、腕を組んで出てきます。\n\n「で、それ意味あるの？」\n「どうせ無理でしょ」\n「誰が見るの？」\n「今さら始めてどうするの？」\n\n……いや、まだ何もしてないのに、\nもう敗因分析してくるの早すぎる。"],
+          ["よく出る口ぐせ", "「恥ずかしくない？」\n「もっとすごい人いるよ」\n「中途半端になるだけじゃない？」\n「やめとけば？」"],
+          ["この彼が出やすい場面", "このタイプの彼が強いと、行動する前に心が冷めてしまいます。\n\n投稿してみたい。\n作ってみたい。\n申し込んでみたい。\n聞いてみたい。\n本音を出してみたい。\n\nそう思った直後に、脳内でスンッとした声が出る。\n\nその声が強いと、挑戦する前に、もう疲れてしまう。\n\nやる気がないわけじゃない。\n本当はやってみたい。"],
+          ["本当は守ろうとしているもの", "でも、期待して失敗するくらいなら、最初から冷めていた方が安全に感じる。\n\n本気を出して笑われるくらいなら、\n「別にそこまでやりたかったわけじゃないし」\nと言える場所にいた方が楽。\n\nこの彼は、あなたの夢を壊したいだけではありません。\n\n本当は、\n恥をかきたくなかった。\n失敗して傷つきたくなかった。\n期待して落ち込みたくなかった。\n本気を出した自分を否定されたくなかった。"],
+          ["でも、その守り方は少しきついかもしれません", "だから、始める前に止めてきたのかもしれません。\n\n冷笑は、傷つかないための鎧だったのかもしれない。\n\nでも今のあなたには、その鎧を少しだけゆるめる時間が必要です。"],
+          ["今日からできる小さな一歩", "今日の合言葉は、\n「意味があるか分からなくても、やってみたいは本物」\n\n全部始めなくていい。\n完璧に形にしなくていい。\n誰かに見せなくてもいい。\n\nまずは、タイトルだけメモする。\n下書きに一行だけ書く。\n誰にも見せずに試してみる。"],
+          ["あなたへのやさしい一言", "あなたの中の「やってみたい」は、まだ小さくても本物です。\n誰かに見せる前に、まずは自分だけが知っていてあげれば大丈夫。\n冷笑する声より、小さな本音を守ってあげましょう。"]
+        ],
+        line: "冷笑彼氏タイプの彼が、\nあなたの挑戦や本音をどう止めてきたのか。\n\nそして、\n「どうせ無理」と笑う声から、\n「怖いなら小さく一緒にやろう」という声へ戻すにはどうしたらいいのか。\n\nタイプ別の深掘りミニレターを、\n公式LINEで受け取れるように準備しています。\n\n診断結果のタイプ名\n「冷笑」\nをLINEで送ってください。\n\n公式LINEでは、タイプ別ミニレターのほかに、診断の更新、有料noteの完成、追加ワークのお知らせも受け取れます。"
+      }
+    };
+
+    const ACTIVE_QUESTIONS = [
+      { text: "休もうとした時、いちばん出やすい声は？", answers: { A: "まだやることあるよね？", B: "休んで何になるの？", C: "周りに迷惑かけない？", D: "誰も助けてくれないしね", E: "休むなら完璧に整えてからでしょ" } },
+      { text: "新しいことを始める前に思いやすいのは？", answers: { A: "もっと準備しなきゃ", B: "どうせ無理じゃない？", C: "人にどう思われるかな", D: "期待しても傷つくだけ", E: "失敗したら終わり" } },
+      { text: "褒められた時の反応は？", answers: { A: "いや、まだまだです", B: "そんなの意味ある？と思う", C: "調子に乗ってると思われそう", D: "どうせ本気で言ってない", E: "もっとできたはずなのに" } },
+      { text: "人に頼りたい時、出てくる考えは？", answers: { A: "自分でやった方が早い", B: "頼んでも意味ないでしょ", C: "嫌な顔されたらどうしよう", D: "どうせ助けてもらえない", E: "ちゃんと説明できないなら頼むな" } },
+      { text: "失敗した日の夜に起きやすいことは？", answers: { A: "次はもっと頑張らなきゃと思う", B: "やっぱり私には無理だったと思う", C: "相手の反応を何度も思い出す", D: "誰にも言わず一人で抱える", E: "脳内反省会が止まらない" } },
+      { text: "恋愛や人間関係で繰り返しやすいのは？", answers: { A: "尽くしすぎて疲れる", B: "始まる前に諦める", C: "相手の機嫌を読みすぎる", D: "本音を言わず離れる", E: "嫌われないよう完璧に振る舞う" } },
+      { text: "仕事や発信で止まりやすい場面は？", answers: { A: "もっと頑張らないと出せない", B: "誰が見るの？と思って止まる", C: "批判されたらどうしようと思う", D: "助けを求めず一人で抱える", E: "完璧じゃないから出せない" } },
+      { text: "自分に対してよく思うことは？", answers: { A: "もっと頑張れるはず", B: "どうせ私なんて", C: "迷惑をかけちゃいけない", D: "期待しない方が楽", E: "ちゃんとしてない私はダメ" } },
+      { text: "一番怖いことは？", answers: { A: "止まったら価値がなくなること", B: "期待して失敗すること", C: "嫌われること", D: "頼って拒絶されること", E: "不完全な自分を見られること" } },
+      { text: "今の人生に一番近い感覚は？", answers: { A: "ずっと追加ミッションが来る", B: "始める前から冷めた声がする", C: "人の機嫌でHPが削られる", D: "いつも一人で戦っている", E: "常に審査されている感じがする" } }
+    ];
+
+    const COMMON_CLOSE = "あなたの中の彼は、\nあなたを苦しめたいだけの敵ではないかもしれません。\n\n本当は、失敗しないように、\n傷つかないように、嫌われないように、\n一人でも生き残れるように、\n不器用なやり方で\nあなたを守ろうとしてきたのかもしれません。\n\nでも、もうその守り方が苦しいなら、\nこれからは付き合い方を変えてもいい。\n\n脳内モラ彼を責めて追い出すのではなく、\n溺愛イージーモード彼氏に育て直す。\nその最初の一歩として、\nタイプ別ミニレターと公式LINEで、\nあなたの中の彼を一緒に見ていきましょう。";
+
+    const ACTIVE_RESULTS = {
+      A: {
+        title: "A：頑張れ鬼上司\nタイプ",
+        catch: "まだ足りない、と急かす声。",
+        keyword: "頑張れ鬼上司",
+        image: "assets/codex/result-a-onijoshi.png",
+        sections: [
+          ["あなたの脳内彼氏はこんな人", "あなたの脳内彼氏は、\n頑張れ鬼上司タイプかもしれません。\n\nこのタイプの彼は、とにかく真面目。\nあなたをサボらせないように、止まらせないように、ずっと管理してきました。\n\nでもその結果、あなたは休むたびに罪悪感が出たり、\n「まだ足りない」「もっと頑張らなきゃ」と思いやすくなっているかもしれません。\n\nあなたが弱いから苦しいのではありません。\n休む許可をくれない彼が、あなたの中にいるだけかもしれないのです。"],
+          ["彼の口ぐせ", "「まだ足りない」\n「もっとちゃんとしろ」\n「休んでる場合じゃない」\n「甘えるな」"],
+          ["起きやすい“またこれか…”", "頑張る → 疲れる → 休めない → さらに頑張る → 限界が来る"],
+          ["刺さる一言", "あなたが足りないんじゃない。\nゴールが動くルールで生きているだけかもしれません。"],
+          ["これからの付き合い方", COMMON_CLOSE]
+        ],
+        line: "診断結果のタイプ名\n「頑張れ鬼上司」\nを公式LINEで送ってください。\n\nタイプ別ミニレターで、あなたの中の彼との付き合い方を受け取れます。"
+      },
+      B: {
+        title: "B：冷笑評論家\nタイプ",
+        catch: "全部わかった顔で、心を切り分ける。",
+        keyword: "冷笑評論家",
+        image: "assets/codex/result-b-reishou.png",
+        sections: [
+          ["あなたの脳内彼氏はこんな人", "あなたの脳内彼氏は、\n冷笑評論家タイプかもしれません。\n\nこのタイプの彼は、あなたが何かを始めようとすると、すぐに冷静な顔で止めてきます。\n\n「それ意味ある？」\n「どうせ無理じゃない？」\n「誰が見るの？」\n\nそんな声が出るたびに、あなたは行動する前から疲れてしまうかもしれません。\n\nでも彼は、あなたの夢を壊したいわけではありません。\n本当は、あなたが失敗して傷つく前に守ろうとしているのかもしれません。"],
+          ["彼の口ぐせ", "「それ意味ある？」\n「どうせ無理」\n「誰が見るの？」\n「恥かくだけじゃない？」"],
+          ["起きやすい“またこれか…”", "やりたい → 調べる → 考える → 不安になる → 結局やらない"],
+          ["刺さる一言", "失敗が怖いんじゃない。\n本当は期待することが怖いのかもしれません。"],
+          ["これからの付き合い方", COMMON_CLOSE]
+        ],
+        line: "診断結果のタイプ名\n「冷笑評論家」\nを公式LINEで送ってください。\n\nタイプ別ミニレターで、あなたの中の彼との付き合い方を受け取れます。"
+      },
+      C: {
+        title: "C：不機嫌モラ彼\nタイプ",
+        catch: "空気で支配して、言葉を濁す。",
+        keyword: "不機嫌モラ彼",
+        image: "assets/codex/result-c-mora.png",
+        sections: [
+          ["あなたの脳内彼氏はこんな人", "あなたの脳内彼氏は、\n不機嫌モラ彼タイプかもしれません。\n\nこのタイプの彼は、いつも少し不機嫌です。\nあなたが本音を言おうとすると、すぐに空気を読ませようとしてきます。\n\n「それ言ったら嫌われるよ」\n「迷惑かけないで」\n「察してよ」\n\nその声に従っているうちに、あなたは自分の気持ちより、相手の機嫌を優先してしまうかもしれません。"],
+          ["彼の口ぐせ", "「空気読んで」\n「迷惑かけるな」\n「嫌われるよ」\n「察してよ」"],
+          ["起きやすい“またこれか…”", "気を使う → 本音を飲み込む → 相手を優先する → 疲れる → なんで私ばっかり、になる"],
+          ["刺さる一言", "嫌われないように生きるほど、\n本当に大切な人から遠ざかることがあります。"],
+          ["これからの付き合い方", COMMON_CLOSE]
+        ],
+        line: "診断結果のタイプ名\n「不機嫌モラ彼」\nを公式LINEで送ってください。\n\nタイプ別ミニレターで、あなたの中の彼との付き合い方を受け取れます。"
+      },
+      D: {
+        title: "D：無関心父\nタイプ",
+        catch: "頼る前に、心を閉じさせる。",
+        keyword: "無関心父",
+        image: "assets/codex/result-d-mukanshin.png",
+        sections: [
+          ["あなたの脳内彼氏はこんな人", "あなたの脳内彼氏は、\n無関心父タイプかもしれません。\n\nこのタイプの彼は、あなたが誰かに頼ろうとした瞬間、静かに突き放してきます。\n\n「期待するな」\n「どうせ助けてもらえない」\n「自分でやれ」\n\nその声が強いと、あなたは頼る前から諦めてしまいます。\n本当は寂しいのに、平気なふりをする。\n本当は助けてほしいのに、「大丈夫」と言ってしまう。\nそんなことが多いかもしれません。"],
+          ["彼の口ぐせ", "「期待するな」\n「頼るな」\n「どうせ助けてもらえない」\n「自分でやれ」"],
+          ["起きやすい“またこれか…”", "頼りたい → でも期待するのが怖い → 一人で抱える → 限界まで頑張る → やっぱり誰も助けてくれない、になる"],
+          ["刺さる一言", "強いから頼れないんじゃない。\n頼る前に止める声がいるだけかもしれません。"],
+          ["これからの付き合い方", COMMON_CLOSE]
+        ],
+        line: "診断結果のタイプ名\n「無関心父」\nを公式LINEで送ってください。\n\nタイプ別ミニレターで、あなたの中の彼との付き合い方を受け取れます。"
+      },
+      E: {
+        title: "E：完璧主義\nマネージャータイプ",
+        catch: "完璧だけを求めて、休む余白を奪う。",
+        keyword: "完璧主義マネージャー",
+        image: "assets/codex/result-e-seiron.png",
+        sections: [
+          ["あなたの脳内彼氏はこんな人", "あなたの脳内彼氏は、\n完璧主義マネージャータイプかもしれません。\n\nこのタイプの彼は、あなたを常にチェックしています。\n\nできたことより、できていないこと。\n褒められたことより、足りないところ。\n進んだことより、まだ未完成な部分。\n\nそこばかり見つけて、あなたにダメ出ししてくるかもしれません。"],
+          ["彼の口ぐせ", "「この程度で満足するな」\n「もっとできるはず」\n「ミスするな」\n「ちゃんとして」"],
+          ["起きやすい“またこれか…”", "頑張る → できたことがある → でも不足を見る → 自信が持てない → また自分責めする"],
+          ["刺さる一言", "能力不足じゃない。\n自分への評価基準だけが異常に厳しいのかもしれません。"],
+          ["これからの付き合い方", COMMON_CLOSE]
+        ],
+        line: "診断結果のタイプ名\n「完璧主義マネージャー」\nを公式LINEで送ってください。\n\nタイプ別ミニレターで、あなたの中の彼との付き合い方を受け取れます。"
+      }
+    };
+
+    const els = {
+      top: document.getElementById("top"),
+      quiz: document.getElementById("quiz"),
+      preResult: document.getElementById("preResult"),
+      result: document.getElementById("result"),
+      startButton: document.getElementById("startButton"),
+      viewResultButton: document.getElementById("viewResultButton"),
+      progressLabel: document.getElementById("progressLabel"),
+      dots: document.getElementById("dots"),
+      questionTitle: document.getElementById("questionTitle"),
+      answers: document.getElementById("answers"),
+      backButton: document.getElementById("backButton"),
+      resultVisual: document.getElementById("resultVisual"),
+      resultTitle: document.getElementById("resultTitle"),
+      resultCatch: document.getElementById("resultCatch"),
+      resultBody: document.getElementById("resultBody"),
+      lineText: document.getElementById("lineText"),
+      lineLink: document.getElementById("lineLink"),
+      shareButton: document.getElementById("shareButton"),
+      copyButton: document.getElementById("copyButton"),
+      retryButton: document.getElementById("retryButton")
+    };
+
+    let currentIndex = 0;
+    let answers = Array(ACTIVE_QUESTIONS.length).fill(null);
+    let currentResultKey = null;
+    els.lineLink.href = LINE_URL || "#";
+
+    function showOnly(section) {
+      [els.top, els.quiz, els.preResult, els.result].forEach((el) => el.classList.add("hidden"));
+      section.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function renderDots() {
+      els.dots.innerHTML = ACTIVE_QUESTIONS.map((_, index) => `<span class="dot ${index <= currentIndex ? "done" : ""}"></span>`).join("");
+    }
+
+    function escapeHtml(text) {
+      return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function formatQuestionText(text) {
+      return escapeHtml(text).replace("、", "、<br>");
+    }
+
+    function formatAnswerText(text) {
+      return escapeHtml(text)
+        .replace(/」(.+)/, "」<br>$1")
+        .replace(/。(.+)/g, "。<br>$1");
+    }
+
+    function renderQuestion() {
+      const question = ACTIVE_QUESTIONS[currentIndex];
+      els.progressLabel.textContent = `Q${currentIndex + 1} / ${ACTIVE_QUESTIONS.length}`;
+      els.questionTitle.innerHTML = formatQuestionText(question.text);
+      renderDots();
+      els.answers.innerHTML = TYPE_ORDER.map((key) => `
+        <button class="answer ${answers[currentIndex] === key ? "selected" : ""}" type="button" data-key="${key}">
+          <span>✦</span>
+          <span>${formatAnswerText(question.answers[key])}</span>
+          <span>✦</span>
+        </button>
+      `).join("");
+      els.backButton.style.visibility = currentIndex === 0 ? "hidden" : "visible";
+    }
+
+    function judgeResult() {
+      const counts = Object.fromEntries(TYPE_ORDER.map((key) => [key, 0]));
+      answers.forEach((answer) => {
+        if (answer) counts[answer] += 1;
+      });
+      const max = Math.max(...Object.values(counts));
+      const tiedKeys = TYPE_ORDER.filter((key) => counts[key] === max);
+      const lastAnswer = [...answers].reverse().find((answer) => tiedKeys.includes(answer));
+      return lastAnswer || tiedKeys[0] || "A";
+    }
+
+    function renderResult() {
+      currentResultKey = judgeResult();
+      const result = ACTIVE_RESULTS[currentResultKey];
+      els.resultVisual.innerHTML = `<img src="${result.image}" alt="${result.title.replace(/\n/g, "")}のイメージイラスト">`;
+      els.resultTitle.innerHTML = result.title.split("\n").map((line) => `<span>${line}</span>`).join("");
+      els.resultCatch.textContent = result.catch;
+      els.resultBody.innerHTML = result.sections.map(([heading, body], index) => `
+        <section class="${index === 0 ? "result-text-card" : "result-section-card"}">
+          <h3 class="section-heading">${heading}</h3>
+          <p>${body}</p>
+        </section>
+      `).join("");
+      els.lineText.innerHTML = `<p>${result.line}</p><p>現在、\n『無理ゲーの主犯は、私の中の“彼”だった。』\nというセルフワークnoteを準備しています。\n\nこのnoteでは、あなたの中の“厳しい彼”を見つけて、責める声から味方の声へ戻していくワークをまとめる予定です。\n\n完成したら、公式LINEでお知らせします。</p>`;
+      showOnly(els.result);
+    }
+
+    async function copyText(text, button, doneLabel) {
+      try {
+        await navigator.clipboard.writeText(text);
+        const original = button.textContent;
+        button.textContent = doneLabel;
+        setTimeout(() => { button.textContent = original; }, 1600);
+      } catch {
+        button.textContent = "コピーできませんでした";
+        setTimeout(() => { button.textContent = "結果をコピー"; }, 1600);
+      }
+    }
+
+    els.startButton.addEventListener("click", () => {
+      currentIndex = 0;
+      answers = Array(ACTIVE_QUESTIONS.length).fill(null);
+      currentResultKey = null;
+      renderQuestion();
+      showOnly(els.quiz);
+    });
+
+    els.answers.addEventListener("click", (event) => {
+      const button = event.target.closest(".answer");
+      if (!button) return;
+      answers[currentIndex] = button.dataset.key;
+      renderQuestion();
+      setTimeout(() => {
+        if (currentIndex === ACTIVE_QUESTIONS.length - 1) {
+          showOnly(els.preResult);
+          return;
+        }
+        currentIndex += 1;
+        renderQuestion();
+      }, 160);
+    });
+
+    els.backButton.addEventListener("click", () => {
+      if (currentIndex === 0) return;
+      currentIndex -= 1;
+      renderQuestion();
+    });
+
+    els.viewResultButton.addEventListener("click", renderResult);
+
+    els.retryButton.addEventListener("click", () => {
+      currentIndex = 0;
+      answers = Array(ACTIVE_QUESTIONS.length).fill(null);
+      currentResultKey = null;
+      showOnly(els.top);
+    });
+
+    els.lineLink.addEventListener("click", (event) => {
+      if (LINE_URL) return;
+      event.preventDefault();
+      alert("公式LINEのURLを設定すると、このボタンから移動できます。");
+    });
+
+    els.shareButton.addEventListener("click", async () => {
+      const resultName = currentResultKey ? ACTIVE_RESULTS[currentResultKey].title.replace(/\n/g, "") : "";
+      const text = `私の脳内彼氏タイプ診断の結果は「${resultName}」でした。あなたも診断してみてね。`;
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: "あなたの脳内彼氏タイプ診断", text, url: location.href });
+          return;
+        } catch (error) {
+          if (error.name === "AbortError") return;
+        }
+      }
+      await copyText(`${text}\n${location.href}`, els.shareButton, "コピーしました");
+    });
+
+    els.copyButton.addEventListener("click", async () => {
+      const result = currentResultKey ? ACTIVE_RESULTS[currentResultKey] : null;
+      const text = result
+        ? `あなたの脳内彼氏タイプ診断\n私の結果：${result.title.replace(/\n/g, "")}\n${result.catch}\n${location.href}`
+        : `あなたの脳内彼氏タイプ診断\n${location.href}`;
+      await copyText(text, els.copyButton, "コピーしました");
+    });
+  </script>
+</body>
+</html>

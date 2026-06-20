@@ -1,4 +1,4 @@
-# 無理ゲー彼氏診断
+# 脳内彼氏の診断
 
 GitHubからNetlifyに公開するための完成版フォルダです。
 
@@ -9,10 +9,10 @@ GitHubからNetlifyに公開するための完成版フォルダです。
 
 ## LINEリンクの差し替え
 
-`index.html` の下記1行を本番URLに変更してください。
+公式LINEリンクは設定済みです。
 
 ```js
-const LINE_URL = "https://example.com/line";
+const LINE_URL = "https://lin.ee/pkn27tH";
 ```
 
 ## 注意
